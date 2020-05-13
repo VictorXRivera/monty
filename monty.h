@@ -36,4 +36,6 @@ typedef struct instruction_s
 #include <string.h>
 #include <limits.h>
 
+__asm__("nop");
+
 #endif

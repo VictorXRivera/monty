@@ -8,7 +8,7 @@
  */
 void push(stack_t **stack, unsigned int line_number)
 {
-	stack_t *element = malloc(sizeof(stack_t));
+	stack_t *element;
 	char *ptr;
 
 	ptr = strtok(NULL, DELIMS);
@@ -17,16 +17,19 @@ void push(stack_t **stack, unsigned int line_number)
 		printf("L%u: usage: push integer\n", line_number);
 		exit(EXIT_FAILURE);
 	}
-
+	element = malloc(sizeof(stack_t));
 	if (element == NULL)
 	{
 		printf("Error: malloc failed\n");
 		exit(EXIT_FAILURE);
 	}
+
 	element->n = atoi(ptr);
 	element->prev = NULL;
 	element->next = *stack;
+	
 	if (*stack != NULL)
 		(*stack)->prev = element;
+	
 	*stack = element;
 }

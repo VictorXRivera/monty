@@ -27,9 +27,9 @@ void push(stack_t **stack, unsigned int line_number)
 	element->n = atoi(ptr);
 	element->prev = NULL;
 	element->next = *stack;
-	
+
 	if (*stack != NULL)
 		(*stack)->prev = element;
-	
+
 	*stack = element;
 }

@@ -45,5 +45,7 @@ void pop(stack_t **stack, unsigned int line_number);
 void swap(stack_t **stack, unsigned int line_number);
 void add(stack_t **stack, unsigned int line_number);
 void nop(stack_t **stack, unsigned int line_number);
-
+void freedom(void);
+void reader(char *the_file, stack_t **stack);
+void parse_commands(stack_t **stack, char *co, unsigned int line_number);
 #endif

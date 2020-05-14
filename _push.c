@@ -2,15 +2,17 @@
 
 /**
  * _push - function to implement push opcode
- * @head: start of the list
- * @n: integer
+ * @x: integer to be passed in
  * Return: none
  */
-void _push(stack_t **head, int n)
+void _push(int x)
 {
-	stack_t *stacknode;
+	stack_t *temp = malloc(sizeof(stack_t));
 
-	stacknode = make_new_node(n);
-	stacknode->next = *head;
-	*head = stacknode;
+	if (temp == NULL)
+		exit(EXIT_FAILURE);
+	temp->n = x;
+	temp->next = head;
+	temp->prev = NULL;
+	head = temp;
 }

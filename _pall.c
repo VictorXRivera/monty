@@ -1,20 +1,21 @@
 #include "monty.h"
 
 /**
- * _pall - function to implement pall opcode
- * @head: pointer to struct
- * @n: integer
- * Return: void
+ * _pall - function to implement pall
+ * Return: pall
  */
-void _pall(stack_t **head, int n)
+size_t _pall(void)
 {
-	stack_t *temporary = *head;
+	size_t pall = 0;
 
-	(void) n;
-
-	while (temporary)
+	while (head != NULL)
 	{
-		print("%d\n", temporary->n);
-		temp = temp->next;
+		if (head->prev == NULL)
+			printf("%d\n", head->n);
+		else
+			printf("%d\n", head->n);
+		head = head->next;
+		pall++;
 	}
+	return (pall);
 }

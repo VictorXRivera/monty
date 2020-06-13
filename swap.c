@@ -1,30 +1,31 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "monty.h"
 
 /**
- * swap - function to swap elements in stack
- * @stack: start of the stack
- * @line_number: line number
+ * swap -  swaps opcode
+ * @stack: stack from main
+ * @line_num: line number
+ *
+ * Return: void
  */
-void swap(stack_t **stack, unsigned int line_number)
+void swap(stack_t **stack, unsigned int line_num)
 {
-	stack_t *element;
+	stack_t *temp = NULL;
+	int number = 0;
 
-	if (!stack || !(*stack) || !(*stack)->next)
+	if (!stack || !*stack || !((*stack)->next))
 	{
-		printf("L%u: can't swap, stack too short\n", line_number);
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "L%d: can't swap, stack too short\n", line_num);
+		status = EXIT_FAILURE;
+		return;
 	}
-	element = (*stack)->next;
+	temp = *stack;
+	number = temp->n;
+	temp->n = number;
 
-	(*stack)->prev = element;
-	(*stack)->next = element->next;
+	temp->n = temp->next->n;
+	temp->next->n = number;
 
-	element->prev = NULL;
-
-	if (element->next)
-		element->next->prev = *stack;
-
-	element->next = *stack;
-
-	*stack = element;
 }

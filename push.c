@@ -1,35 +1,41 @@
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
 #include "monty.h"
 
 /**
- * push - function to implement push opcode
- * @stack: double pointer to start of list
- * @line_number: line number
- * Return: none
+ * push - push opcode
+ * @stack: the stack from main
+ * @line_num: number of lines
+ *
+ * Return: void
  */
-void push(stack_t **stack, unsigned int line_number)
+void push(stack_t **stack, unsigned int line_num)
 {
-	stack_t *element;
-	char *ptr;
+	char *h = global.argument;
 
-	ptr = strtok(NULL, DELIMS);
-	if (ptr == NULL)
+	if ((is_digit(h)) == 0)
 	{
-		printf("L%u: usage: push integer\n", line_number);
-		exit(EXIT_FAILURE);
-	}
-	element = malloc(sizeof(stack_t));
-	if (element == NULL)
-	{
-		printf("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
+		fprintf(stderr, "L%d: usage: push integer\n", line_num);
+		status = EXIT_FAILURE;
+		return;
 	}
 
-	element->n = atoi(ptr);
-	element->prev = NULL;
-	element->next = *stack;
-
-	if (*stack != NULL)
-		(*stack)->prev = element;
-
-	*stack = element;
+	if (global.data_struct == 1)
+	{
+		if (!add_node(stack, atoi(global.argument)))
+		{
+			return;
+			status = EXIT_FAILURE;
+		}
+	}
+	else
+	{
+		if (!queue_node(stack, atoi(global.argument)))
+		{
+			return;
+			status = EXIT_FAILURE;
+		}
+	}
 }
